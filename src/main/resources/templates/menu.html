@@ -1,0 +1,103 @@
+<div id="wrapper" th:fragment="menu-bar">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #6610f2;">
+
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/home}">
+            <div class="sidebar-brand-text mx-3">Petmax Admin</div>
+        </a>
+
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/home}">
+                <i class="fas fa-fw fa-home"></i>
+                <span>Home</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/dashboard}">
+                <i class="fa fa-fw fa-chart-pie"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading text-white">
+            Menu
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+               aria-expanded="true" aria-controls="collapseOne">
+                <i class="fas fa-fw fa-archive"></i>
+                <span>Cadastros</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h1 class="collapse-header text-danger">Cadastros:</h1>
+                    <a class="collapse-item" th:href="@{/ProdutoListar}">Produtos</a>
+                    <a class="collapse-item" th:href="@{/CategoriaListar}">Categorias</a>
+                    <a class="collapse-item" th:href="@{/FornecedorListar}">Fornecedores</a>
+                    <a class="collapse-item" th:href="@{/ReposicaoListar}">Reposições</a>
+                    <a class="collapse-item" th:href="@{/ClienteListar}">Clientes</a>
+                    <a class="collapse-item" th:href="@{/VendaListar}">Vendas</a>
+                    <a class="collapse-item" th:href="@{/PromissoriaListar}">Promissórias</a>
+                    <a class="collapse-item" th:href="@{/EntregaListar}">Entregas</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cogs"></i>
+                <span>Administrativo</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h1 class="collapse-header text-danger">Administrativo:</h1>
+                    <a class="collapse-item" th:href="@{/BuscaFornecedor}">Buscar Fornecedores</a>
+                    <a class="collapse-item" th:href="@{/PromocaoListar}">Gestão de Promoções</a>
+                    <a class="collapse-item" th:href="@{/Relatorios}">Relatórios</a>
+                    <a class="collapse-item" th:href="@{/UsuarioListar}">Gestão de Usuários</a>
+                </div>
+            </div>
+        </li>
+
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <div id="content-wrapper" class="d-flex flex-column min-vh-100">
+
+        <div id="content">
+
+            <nav class="navbar navbar-expand navbar-light bg-danger topbar mb-4 static-top shadow">
+
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-white small">Admin</span>
+                            <img class="img-profile rounded-circle" th:src="@{/img/undraw_profile.svg}">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <form th:action="@{/logout}" method="post" class="dropdown-item p-0 m-0 border-0 bg-transparent">
+                                <button type="submit" class="btn btn-link dropdown-item">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>

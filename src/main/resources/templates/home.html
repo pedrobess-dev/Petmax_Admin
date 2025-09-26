@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{header :: header-links}"></div>
+    <style>
+        .card-option {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: none;
+            border-radius: 12px;
+        }
+        .card-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            color: #6610f2;
+            margin-bottom: 15px;
+        }
+        .card-icon2 {
+            font-size: 2.5rem;
+            color: #E74A3B;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body id="page-top" class="d-flex flex-column min-vh-100">
+<div th:replace="~{menu :: menu-bar}"></div>
+
+<div class="container-fluid">
+    <div class="text-center mb-5">
+        <h1 class="h1 text-gray-800 font-weight-bold">🐾 Bem-vindo ao Petmax Admin</h1>
+        <p class="text-muted">Gerencie seu petshop de forma simples, rápida e moderna.</p>
+    </div>
+
+    <div class="container">
+        <h2 class="h3 mb-4 text-gray-800 text-center">Cadastros</h2>
+        <div class="row">
+            <!-- Produtos -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/ProdutoListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-box-open card-icon"></i>
+                        <h5 class="text-dark">Produtos</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Categorias -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/CategoriaListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-tags card-icon"></i>
+                        <h5 class="text-dark">Categorias</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Fornecedores -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/FornecedorListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-truck card-icon"></i>
+                        <h5 class="text-dark">Fornecedores</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Reposições -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/ReposicaoListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-sync-alt card-icon"></i>
+                        <h5 class="text-dark">Reposições</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Clientes -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/ClienteListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-user-friends card-icon"></i>
+                        <h5 class="text-dark">Clientes</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Vendas -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/VendaListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-shopping-cart card-icon"></i>
+                        <h5 class="text-dark">Vendas</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Promissórias -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/PromissoriaListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-file-invoice-dollar card-icon"></i>
+                        <h5 class="text-dark">Promissórias</h5>
+                    </div>
+                </a>
+            </div>
+            <!-- Entregas -->
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/EntregaListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-truck-moving card-icon"></i>
+                        <h5 class="text-dark">Entregas</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="h3 mb-4 text-gray-800 text-center">Administrativo</h2>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/BuscarFornecedores}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-search card-icon2"></i>
+                        <h5 class="text-dark">Buscar Fornecedores</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/PromocaoListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-percent card-icon2"></i>
+                        <h5 class="text-dark">Gestão de Promoções</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/Relatorios}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-chart-line card-icon2"></i>
+                        <h5 class="text-dark">Relatórios</h5>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a th:href="@{/UsuarioListar}" class="text-decoration-none">
+                    <div class="card card-option text-center p-4 shadow-sm">
+                        <i class="fas fa-users-cog card-icon2"></i>
+                        <h5 class="text-dark">Gestão de Usuários</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{footer :: footer-content}" class="mt-auto"></footer>
+</body>
+</html>

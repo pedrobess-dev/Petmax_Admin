@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{header :: header-links}"></div>
+    <style>
+        .text-danger {
+        color: #ff0000 !important; /* vermelho forte */
+        font-weight: bold;
+        font-size: 1rem;
+        display: block;
+        margin-top: 5px;
+        text-shadow: 0 0 2px rgba(0,0,0,0.2);
+    }
+    </style>
+</head>
+<body>
+<div th:replace="~{menu :: menu-bar}"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h2 class="page-title float-left" th:text="${modoEdicao} ? 'Edição de Reposição' : 'Cadastro de Reposição'"></h2>
+                <ol class="breadcrumb float-right" style="background-color: #e6d9fc;">
+                    <li class="breadcrumb-item"><a th:href="@{/home}" style="color: #6610f2;">Home</a></li>
+                    <li class="breadcrumb-item active"><a th:href="@{/ReposicaoListar}" style="color: #6610f2;">Reposições</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- Basic Card Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold" style="color: #6610f2;" th:text="${modoEdicao} ? 'Editar Reposição' : 'Nova Reposição'"></h4>
+        </div>
+        <div class="card-body">
+            <form name="cadastrarreposicao" th:action="@{/ReposicaoSalvar}" th:object="${reposicao}" method="POST">
+                <div class="form-row">
+                    <input type="hidden" class="form-control form-control-user"
+                           id="idreposicao" name="idreposicao" aria-describedby="ID da reposicao"
+                           th:field="*{idReposicao}" readonly="readonly" placeholder="">
+                    <div class="form-group col-md-6">
+                        <label for="idproduto" class="col-form-label">Produto</label>
+                        <select th:field="*{produto}" name="idproduto" id="idproduto" class="form-control form-control-user">
+                            <option value="">Selecione</option>
+                            <option th:each="p : ${produtos}"
+                                    th:value="${p.idProduto}"
+                                    th:text="${p.nomeProduto}"
+                                    th:selected="${reposicao.produto != null and reposicao.produto.idProduto == p.idProduto}">
+                            </option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('produto')}" th:errors="*{produto}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="necessidade" class="col-form-label">Necessidade</label>
+                        <select th:field="*{necessidade}" name="necessidade" id="necessidade" class="form-control form-control-user">
+                            <option value="">Selecione</option>
+                            <option value="BAIXA">BAIXA</option>
+                            <option value="MÉDIA">MÉDIA</option>
+                            <option value="ALTA">ALTA</option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('necessidade')}" th:errors="*{necessidade}" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input class="btn btn-facebook btn-user btn-block" style="background-color: #6610f2;" type="submit" name="cadastrar" id="cadastrar" value="Cadastrar"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input class="btn btn-facebook btn-user btn-block" style="background-color: #6610f2;" type="reset" name="limpar" id="limpar" value="Limpar">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer th:replace="~{footer :: footer-content}" class="mt-auto"></footer>
+</div>
+</div>
+
+</body>
+</html>

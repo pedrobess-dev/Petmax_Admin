@@ -1,0 +1,41 @@
+<footer class="sticky-footer bg-white mt-auto py-4" th:fragment="footer-content">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Logo da empresa -->
+            <div class="col-md-3 col-sm-12 text-center text-md-left mb-3 mb-md-0">
+                <img src="/img/logo_petmax.png" alt="Petmax Logo" style="max-width: 120px; height: auto;">
+            </div>
+
+            <!-- Informações da empresa -->
+            <div class="col-md-6 col-sm-12 text-center text-md-left mb-3 mb-md-0">
+                <h5 class="mb-2">Petmax</h5>
+                <p class="mb-1">Telefone: (17) 99702-2373</p>
+                <p class="mb-1">Endereço: Rua das Flores, 123 - Bairro Centro, Macedônia-SP</p>
+                <p class="mb-0">E-mail: petmaxmacedonia@gmail.com | Instagram: <a href="https://www.instagram.com/petmax_macedonia" target="_blank">@petmax_macedonia</a></p>
+            </div>
+
+            <!-- Links rápidos -->
+            <div class="col-md-3 col-sm-12 text-center text-md-right">
+                <h6 class="mb-2">Links úteis</h6>
+                <ul class="list-unstyled">
+                    <li><a th:href="@{/home}">Home</a></li>
+                    <li><a th:href="@{/Contato}">Contato</a></li>
+                    <li><a th:href="@{/Sobre}">Sobre nós</a></li>
+                    <li><a th:href="@{/PoliticaPrivacidade}">Política de Privacidade</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr class="my-3">
+
+        <div class="row">
+            <div class="col-12 text-center small">
+                <span>Copyright &copy; 2025 Petmax. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/sb-admin-2.min.js}" type="text/javascript"></script>
+</footer>

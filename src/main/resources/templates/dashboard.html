@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{header :: header-links}"></div>
+</head>
+<body>
+<div th:replace="~{menu :: menu-bar}"></div>
+
+<!-- Importação do Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Dashboard de Vendas</h2>
+
+    <div class="row">
+        <!-- Cards com informações -->
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-danger">Total de Vendas</div>
+                <div class="card-body" style="background-color: #6610f2; height: 80px;">
+                    <h4 class="card-title" id="totalVendas">--</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-danger">Valor Total Vendido</div>
+                <div class="card-body" style="background-color: #6610f2; height: 80px;">
+                    <h4 class="card-title" id="valorTotalVendas">--</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-danger">Produto Mais Vendido</div>
+                <div class="card-body" style="background-color: #6610f2; height: 80px;">
+                    <h5 class="card-title" id="produtoMaisVendido">--</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-danger">Valor Total de Promissórias</div>
+                <div class="card-body" style="background-color: #6610f2; height: 80px;">
+                    <h4 class="card-title" id="valorTotalPromissorias">--</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h5 class="text-center">Total de Vendas nos Últimos 6 Meses</h5>
+                <canvas id="graficoVendasUltimos6Meses" style="width: 100%; max-width: 600px; height: 300px; margin-right: 60px;"></canvas>
+            </div>
+        </div>
+        <div class="col-4">
+            <canvas id="graficoValor" style="margin-left: 40px;"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch("dashboard-data")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("totalVendas").textContent = data.totalVendas;
+                document.getElementById("valorTotalVendas").textContent = "R$ " + data.valorTotalVendas.toFixed(2);
+                document.getElementById("produtoMaisVendido").textContent = data.produtoMaisVendido;
+                document.getElementById("valorTotalPromissorias").textContent = "R$ " + data.valorTotalPromissorias.toFixed(2);
+
+                // Processando dados dos últimos 6 meses
+                let meses = [];
+                let valores = [];
+                data.vendasUltimos6Meses.forEach(mesVenda => {
+                    meses.push(mesVenda.mes);
+                    valores.push(mesVenda.valor);
+                });
+
+                // Criando gráfico dos últimos 6 meses
+                new Chart(document.getElementById("graficoVendasUltimos6Meses"), {
+                    type: "line",
+                    data: {
+                        labels: meses,
+                        datasets: [{
+                            label: "Valor Total de Vendas",
+                            data: valores,
+                            backgroundColor: "rgba(75, 0, 130, 0.2)",
+                            borderColor: "rgba(75, 0, 130, 1)",
+                            borderWidth: 2,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: true }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Criando gráfico de valores
+                new Chart(document.getElementById("graficoValor"), {
+                    type: "pie",
+                    data: {
+                        labels: ["Valor Total", "Valor Promissória"],
+                        datasets: [{
+                            data: [data.valorTotalVendas, data.valorTotalPromissorias],
+                            backgroundColor: ["#6610f2", "#dc3545"]
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+
+            })
+            .catch(error => console.error("Erro ao carregar dados do dashboard:", error));
+    });
+</script>
+
+<div th:replace="~{footer :: footer-content}"></div>
+</body>
+</html>
