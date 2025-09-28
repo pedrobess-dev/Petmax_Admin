@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class DashboardDataController {
@@ -27,17 +28,23 @@ public class DashboardDataController {
 
         data.setTotalVendas((int) vendaRepository.totalVendas());
         data.setValorTotalVendas(vendaRepository.somaValorTotal());
-
         data.setProdutoMaisVendido(
                 vendaRepository.produtoMaisVendido().orElse("Nenhum")
         );
-
         data.setValorTotalPromissorias(promissoriaRepository.somaValorTotal());
 
         LocalDate dataInicio = LocalDate.now().minusMonths(6);
-        List<DashboardData.VendaMes> resultados = vendaRepository.vendasUltimos6Meses(dataInicio);
 
-        data.setVendasUltimos6Meses(resultados);
+        // 🔹 Converter resultado Object[] para DashboardData.VendaMes
+        List<DashboardData.VendaMes> vendasMes = vendaRepository.vendasUltimos6Meses(dataInicio)
+                .stream()
+                .map(r -> new DashboardData.VendaMes(
+                        (String) r[0],                // mês (ex: Jan, Feb...)
+                        ((Number) r[1]).doubleValue() // valor
+                ))
+                .collect(Collectors.toList());
+
+        data.setVendasUltimos6Meses(vendasMes);
 
         return data;
     }

@@ -1,6 +1,5 @@
 package br.com.pebessao.PetmaxAdmin.repository;
 
-import br.com.pebessao.PetmaxAdmin.dto.DashboardData;
 import br.com.pebessao.PetmaxAdmin.model.Cliente;
 import br.com.pebessao.PetmaxAdmin.model.Produto;
 import br.com.pebessao.PetmaxAdmin.model.Venda;
@@ -31,14 +30,15 @@ public interface VendaRepository extends JpaRepository<Venda, String> {
     )
     Optional<String> produtoMaisVendido();
 
-    @Query("SELECT new br.com.pebessao.PetmaxAdmin.dto.DashboardData$VendaMes(" +
-            "FUNCTION('to_char', v.dataVenda, 'Mon'), " +
-            "SUM(v.valorVenda)) " +
-            "FROM Venda v " +
-            "WHERE v.dataVenda >= :dataInicio " +
-            "GROUP BY FUNCTION('to_char', v.dataVenda, 'Mon'), FUNCTION('date_trunc', 'month', v.dataVenda) " +
-            "ORDER BY FUNCTION('date_trunc', 'month', v.dataVenda)")
-    List<DashboardData.VendaMes> vendasUltimos6Meses(@Param("dataInicio") LocalDate dataInicio);
+    @Query(
+            value = "SELECT TO_CHAR(v.dataVenda, 'Mon') AS mes, SUM(v.valorVenda) AS valor " +
+                    "FROM venda v " +
+                    "WHERE v.dataVenda >= :dataInicio " +
+                    "GROUP BY TO_CHAR(v.dataVenda, 'Mon'), DATE_TRUNC('month', v.dataVenda) " +
+                    "ORDER BY DATE_TRUNC('month', v.dataVenda)",
+            nativeQuery = true
+    )
+    List<Object[]> vendasUltimos6Meses(@Param("dataInicio") LocalDate dataInicio);
 
 
     long countByProduto(Produto produto);
