@@ -50,14 +50,14 @@ function buscarFornecedor() {
 
         fornecedorTable.row.add([
             f.razao_social || '-',
-            f.estabelecimento?.cnpj || '-',
+            formatarCNPJ(f.estabelecimento?.cnpj) || '-',
             f.estabelecimento?.email || '-',
-            f.estabelecimento?.telefone1 || '-',
+            `(${f.estabelecimento?.ddd1 || '-'})${f.estabelecimento?.telefone1 || '-'}`,
             f.estabelecimento?.cep || '-',
             `${f.estabelecimento?.cidade?.nome || '-'}/${f.estabelecimento?.estado?.sigla || '-'}`,
-            `${f.estabelecimento?.logradouro || '-'} ${f.estabelecimento?.numero || ''}`,
+            `${f.estabelecimento?.bairro || '-'}, ${f.estabelecimento?.logradouro || '-'}, ${f.estabelecimento?.numero || ''}`,
             `<button class="btn btn-success btn-sm"
-                onclick='salvarFornecedor(${encodeURIComponent(JSON.stringify(f))})'>
+                onclick='salvarFornecedor("${encodeURIComponent(JSON.stringify(f))}")'>
                 <i class="fa fa-save"></i> Salvar
             </button>`
         ]).draw();
@@ -71,16 +71,20 @@ function salvarFornecedor(fornecedorJson) {
     const fornecedor = JSON.parse(decodeURIComponent(fornecedorJson));
 
     const fornecedorPayload = {
-        razaoSocial: fornecedor.razao_social,
-        cnpj: fornecedor.estabelecimento?.cnpj,
-        email: fornecedor.estabelecimento?.email || null,
-        telefone: fornecedor.estabelecimento?.telefone1 || null,
-        cep: fornecedor.estabelecimento?.cep || null,
-        cidade: fornecedor.estabelecimento?.cidade || null,
-        uf: fornecedor.estabelecimento?.estado || null,
-        logradouro: fornecedor.estabelecimento?.logradouro || null,
-        numero: fornecedor.estabelecimento?.numero || null,
-        bairro: fornecedor.estabelecimento?.bairro || null
+        nomeFornecedor: fornecedor.razao_social || "-",
+        cnpj: formatarCNPJ(fornecedor.estabelecimento?.cnpj) || "-",
+        email: fornecedor.estabelecimento?.email || "-",
+        telefone: fornecedor.estabelecimento?.ddd1 && fornecedor.estabelecimento?.telefone1
+                    ? `(${fornecedor.estabelecimento.ddd1})${fornecedor.estabelecimento.telefone1}`
+                    : "-",
+        cep: fornecedor.estabelecimento?.cep || "-",
+        cidade: fornecedor.estabelecimento?.cidade?.nome || "-",
+        uf: fornecedor.estabelecimento?.estado?.sigla || "-",
+        bairro: fornecedor.estabelecimento?.bairro || "-",
+        rua: fornecedor.estabelecimento?.logradouro || "-",
+        numero: fornecedor.estabelecimento?.numero && fornecedor.estabelecimento?.numero !== "S/NR"
+                ? parseInt(fornecedor.estabelecimento?.numero)
+                : 0
     };
 
     fetch(`/api/fornecedores/salvar`, {
@@ -93,12 +97,13 @@ function salvarFornecedor(fornecedorJson) {
         return response.json();
     })
     .then(data => {
-        mostrarAlerta("Fornecedor salvo com sucesso: " + data.razao_social, "success");
+        mostrarAlerta("Fornecedor salvo com sucesso: " + data.nomeFornecedor, "success");
     })
     .catch(error => {
         mostrarAlerta("Erro ao salvar fornecedor: " + error.message, "danger");
     });
 }
+
 
 function mostrarAlerta(mensagem, tipo) {
     const container = document.getElementById("alertContainer");
@@ -107,4 +112,10 @@ function mostrarAlerta(mensagem, tipo) {
             <span>${mensagem}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
+}
+
+function formatarCNPJ(cnpj) {
+    if (!cnpj) return '-';
+    cnpj = cnpj.replace(/\D/g, ''); // garante só números
+    return cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
 }

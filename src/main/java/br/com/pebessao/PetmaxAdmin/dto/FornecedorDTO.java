@@ -48,6 +48,9 @@ public class FornecedorDTO {
         @JsonProperty("cep")
         private String cep;
 
+        @JsonProperty("ddd1")
+        private String ddd;
+
         @JsonProperty("telefone1")
         private String telefone;
 
@@ -103,6 +106,14 @@ public class FornecedorDTO {
 
         public void setCep(String cep) {
             this.cep = cep;
+        }
+
+        public String getDdd() {
+            return ddd;
+        }
+
+        public void setDdd(String ddd) {
+            this.ddd = ddd;
         }
 
         public String getTelefone() {

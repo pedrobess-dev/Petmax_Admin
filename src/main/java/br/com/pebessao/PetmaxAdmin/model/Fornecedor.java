@@ -21,8 +21,8 @@ public class Fornecedor {
     private Integer idFornecedor;
 
     @NotBlank(message = "Nome do fornecedor é obrigatório")
-    @Size(max = 50, message = "Nome do fornecedor não pode exceder 50 caracteres.")
-    @Column(name = "nomefornecedor", nullable = false, length = 50)
+    @Size(max = 70, message = "Nome do fornecedor não pode exceder 70 caracteres.")
+    @Column(name = "nomefornecedor", nullable = false, length = 70)
     private String nomeFornecedor;
 
     @NotBlank(message = "Telefone é obrigatório")
