@@ -75,7 +75,7 @@ function salvarFornecedor(fornecedorJson) {
         cnpj: formatarCNPJ(fornecedor.estabelecimento?.cnpj) || "-",
         email: fornecedor.estabelecimento?.email || "-",
         telefone: fornecedor.estabelecimento?.ddd1 && fornecedor.estabelecimento?.telefone1
-                    ? `(${fornecedor.estabelecimento.ddd1})${fornecedor.estabelecimento.telefone1}`
+                    ? `(${fornecedor.estabelecimento.ddd1})${fornecedor.estabelecimento.telefone1}`.substring(0, 14)
                     : "-",
         cep: fornecedor.estabelecimento?.cep || "-",
         cidade: fornecedor.estabelecimento?.cidade?.nome || "-",
@@ -89,18 +89,26 @@ function salvarFornecedor(fornecedorJson) {
 
     fetch(`/api/fornecedores/salvar`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+                "Content-Type": "application/json",
+                // *** ADICIONE ESTE CABEÇALHO ***
+                'Authorization': 'Basic ' + btoa('admin:admin')
+        },
         body: JSON.stringify(fornecedorPayload)
     })
     .then(response => {
-        if (!response.ok) throw new Error("Erro ao salvar fornecedor");
-        return response.json();
+    if (!response.ok) {
+        return response.text().then(text => {
+            throw new Error(text || "Erro desconhecido ao salvar fornecedor.");
+        });
+    }
+    return response.json(); // Se OK, continua lendo o JSON
     })
     .then(data => {
         mostrarAlerta("Fornecedor salvo com sucesso: " + data.nomeFornecedor, "success");
     })
     .catch(error => {
-        mostrarAlerta("Erro ao salvar fornecedor: " + error.message, "danger");
+    mostrarAlerta("Erro ao salvar fornecedor: " + error.message, "danger");
     });
 }
 

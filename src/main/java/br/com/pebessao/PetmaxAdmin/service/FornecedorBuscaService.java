@@ -27,6 +27,22 @@ public class FornecedorBuscaService {
     }
 
     public Fornecedor salvarFornecedor(FornecedorSalvarDTO dto) {
+
+        if (fornecedorRepository.existsByCnpj(dto.getCnpj())) {
+            throw new IllegalArgumentException("CNPJ " + dto.getCnpj() + " já está cadastrado.");
+        }
+
+        // Se a API externa não fornecer o email, ele pode ir nulo,
+        // o que causaria um DataIntegrityViolationException no banco
+        if (dto.getEmail() == null || dto.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("O e-mail do fornecedor é obrigatório e não foi encontrado na API.");
+        }
+
+        if (dto.getNumero() == null || dto.getNumero() < 0) {
+            // Se a API externa retornou algo que virou 'null' ou um valor negativo
+            throw new IllegalArgumentException("O número do endereço é obrigatório e deve ser um valor válido (maior ou igual a zero, se S/N não for o caso).");
+        }
+
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNomeFornecedor(dto.getNomeFornecedor());
         fornecedor.setTelefone(dto.getTelefone());
