@@ -101,6 +101,7 @@
                     <th align="left">ID</th>
                     <th align="left">Cliente</th>
                     <th align="left">Produtos</th>
+                    <th align="left">Qtd. Vendida</th>
                     <th align="left">Valor</th>
                     <th align="left">Data da Venda</th>
                     <th align="right"></th>
@@ -112,6 +113,7 @@
                     <td align="left" th:text="${v.idVenda}"></td>
                     <td align="left" th:text="${v.cliente != null ? v.cliente.nomeCliente : 'N/A'}"></td>
                     <td align="left" th:text="${v.produto != null ? v.produto.nomeProduto : 'N/A'}"></td>
+                    <td align="left" th:text="${v.qtdVendida}"></td>
                     <td align="left" th:text="${v.valorVenda}"></td>
                     <td align="left" th:text="${v.dataVenFormatada}"></td>
                     <td align="center">

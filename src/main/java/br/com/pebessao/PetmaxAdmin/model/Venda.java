@@ -30,6 +30,10 @@ public class Venda {
     @JoinColumn(name = "idproduto", nullable = false)
     private Produto produto;
 
+    @NotNull(message = "Quantidade é obrigatório")
+    @Column(name = "qtdVendida", nullable = false)
+    private Integer qtdVendida;
+
     @NotNull(message = "Valor é obrigatório")
     @Column(name = "valorVenda", nullable = false)
     private double valorVenda;
@@ -38,11 +42,12 @@ public class Venda {
     @Column(name = "dataVenda", nullable = false)
     private LocalDate dataVenda;
 
-    public Venda(Integer idVenda, Cliente cliente, Produto produto, double valorVenda,
-                 LocalDate dataVenda) {
+    public Venda(Integer idVenda, Cliente cliente, Produto produto, Integer qtdVendida,
+                 double valorVenda, LocalDate dataVenda) {
         this.idVenda = idVenda;
         this.cliente = cliente;
         this.produto = produto;
+        this.qtdVendida = qtdVendida;
         this.valorVenda = valorVenda;
         this.dataVenda = dataVenda;
     }
@@ -51,6 +56,7 @@ public class Venda {
         this.idVenda = 0;
         this.cliente = null;
         this.produto = null;
+        this.qtdVendida = 0;
         this.valorVenda = 0.0;
         this.dataVenda = LocalDate.now();
     }
@@ -77,6 +83,14 @@ public class Venda {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Integer getQtdVendida() {
+        return qtdVendida;
+    }
+
+    public void setQtdVendida(Integer qtdVendida) {
+        this.qtdVendida = qtdVendida;
     }
 
     public double getValorVenda() {

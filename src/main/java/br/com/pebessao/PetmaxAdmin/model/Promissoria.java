@@ -27,6 +27,15 @@ public class Promissoria {
     @JoinColumn(name = "idcliente", nullable = false)
     private Cliente cliente;
 
+    @NotNull(message = "Produto é obrigatório")
+    @ManyToOne
+    @JoinColumn(name = "idproduto", nullable = false)
+    private Produto produto;
+
+    @NotNull(message = "Quantidade é obrigatório")
+    @Column(name = "qtdVendida", nullable = false)
+    private Integer qtdVendida;
+
     @NotNull(message = "Valor é obrigatório")
     @Column(name = "valor", nullable = false)
     private double valor;
@@ -44,10 +53,12 @@ public class Promissoria {
     @Column(name = "dataValidade", nullable = false)
     private LocalDate dataValidade;
 
-    public Promissoria(Integer idPromissoria, Cliente cliente, double valor, String status,
-                       LocalDate dataEmissao, LocalDate dataValidade) {
+    public Promissoria(Integer idPromissoria, Cliente cliente, Produto produto, Integer qtdVendida,
+                       double valor, String status, LocalDate dataEmissao, LocalDate dataValidade) {
         this.idPromissoria = idPromissoria;
         this.cliente = cliente;
+        this.produto = produto;
+        this.qtdVendida = qtdVendida;
         this.valor = valor;
         this.status = status;
         this.dataEmissao = dataEmissao;
@@ -57,6 +68,8 @@ public class Promissoria {
     public Promissoria() {
         this.idPromissoria = 0;
         this.cliente = null;
+        this.produto = null;
+        this.qtdVendida = 0;
         this.valor = 0.0;
         this.status = "";
         this.dataEmissao = LocalDate.now();
@@ -77,6 +90,22 @@ public class Promissoria {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public double getQtdVendida() {
+        return qtdVendida;
+    }
+
+    public void setQtdVendida(Integer qtdVendida) {
+        this.qtdVendida = qtdVendida;
     }
 
     public double getValor() {

@@ -2,6 +2,7 @@ package br.com.pebessao.PetmaxAdmin.controller;
 
 import br.com.pebessao.PetmaxAdmin.model.Promissoria;
 import br.com.pebessao.PetmaxAdmin.service.ClienteService;
+import br.com.pebessao.PetmaxAdmin.service.ProdutoService;
 import br.com.pebessao.PetmaxAdmin.service.PromissoriaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PromissoriaController {
     private final PromissoriaService promService;
     private final ClienteService cliService;
+    private final ProdutoService prodService;
 
-    public PromissoriaController(PromissoriaService promService, ClienteService cliService) {
+    public PromissoriaController(PromissoriaService promService, ClienteService cliService,
+                                 ProdutoService prodService) {
         this.promService = promService;
         this.cliService = cliService;
+        this.prodService = prodService;
     }
 
     @GetMapping("/PromissoriaListar")
@@ -33,6 +37,7 @@ public class PromissoriaController {
     public String novo(Model model) {
         model.addAttribute("promissoria", new Promissoria());
         model.addAttribute("clientes", cliService.listarTodos());
+        model.addAttribute("produtos", prodService.listarTodos());
         model.addAttribute("modoEdicao", false);
         return "cadastros/promissoria/promissoriaCadastrar";
     }
@@ -41,6 +46,7 @@ public class PromissoriaController {
     public String salvar(@Valid @ModelAttribute Promissoria promissoria, BindingResult result,
                          Model model, RedirectAttributes redirectAttributes) {
         model.addAttribute("clientes", cliService.listarTodos());
+        model.addAttribute("produtos", prodService.listarTodos());
 
         if (result.hasErrors()) {
             return "cadastros/promissoria/promissoriaCadastrar";
@@ -62,6 +68,7 @@ public class PromissoriaController {
     public String editar(@PathVariable Integer idpromissoria, Model model) {
         model.addAttribute("promissoria", promService.buscarPorId(idpromissoria));
         model.addAttribute("clientes", cliService.listarTodos());
+        model.addAttribute("produtos", prodService.listarTodos());
         model.addAttribute("modoEdicao", true);
         return "cadastros/promissoria/promissoriaCadastrar";
     }

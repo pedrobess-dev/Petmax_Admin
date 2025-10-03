@@ -100,6 +100,8 @@
                 <tr>
                     <th align="left">ID</th>
                     <th align="left">Cliente</th>
+                    <th align="left">Produto</th>
+                    <th align="left">Qtd. Vendida</th>
                     <th align="left">Valor</th>
                     <th align="left">Data Emissão</th>
                     <th align="left">Data Validade</th>
@@ -112,6 +114,8 @@
                 <tr th:each="pr : ${promissorias}">
                     <td align="left" th:text="${pr.idPromissoria}"></td>
                     <td align="left" th:text="${pr.cliente != null ? pr.cliente.nomeCliente : 'N/A'}"></td>
+                    <td align="left" th:text="${pr.produto != null ? pr.produto.nomeProduto : 'N/A'}"></td>
+                    <td align="left" th:text="${pr.qtdVendida}"></td>
                     <td align="left" th:text="${pr.valor}"></td>
                     <td align="left" th:text="${pr.dataEmiFormatada}"></td>
                     <td align="left" th:text="${pr.dataValiFormatada}"></td>

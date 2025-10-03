@@ -1,6 +1,7 @@
 package br.com.pebessao.PetmaxAdmin.repository;
 
 import br.com.pebessao.PetmaxAdmin.model.Cliente;
+import br.com.pebessao.PetmaxAdmin.model.Produto;
 import br.com.pebessao.PetmaxAdmin.model.Promissoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +14,5 @@ public interface PromissoriaRepository extends JpaRepository<Promissoria, String
     double somaValorTotal();
 
     long countByCliente(Cliente cliente);
+    long countByProduto(Produto produto);
 }
