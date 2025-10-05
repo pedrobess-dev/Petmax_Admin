@@ -29,8 +29,7 @@ public class Usuario {
     private String nomeUsuario;
 
     @NotBlank(message = "Senha é obrigatório")
-    @Size(max = 8, message = "Senha não pode exceder 8 caracteres.")
-    @Column(name = "senha", nullable = false, length = 8)
+    @Column(name = "senha", nullable = false)
     private String senha;
 
     @NotBlank(message = "Email é obrigatório")

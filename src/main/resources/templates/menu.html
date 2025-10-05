@@ -12,7 +12,7 @@
                 <i class="fas fa-fw fa-home"></i>
                 <span>Home</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item active" sec:authorize="hasRole('ADMINISTRADOR')">
             <a class="nav-link" th:href="@{/dashboard}">
                 <i class="fa fa-fw fa-chart-pie"></i>
                 <span>Dashboard</span></a>
@@ -33,19 +33,19 @@
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h1 class="collapse-header text-danger">Cadastros:</h1>
-                    <a class="collapse-item" th:href="@{/ProdutoListar}">Produtos</a>
-                    <a class="collapse-item" th:href="@{/CategoriaListar}">Categorias</a>
-                    <a class="collapse-item" th:href="@{/FornecedorListar}">Fornecedores</a>
-                    <a class="collapse-item" th:href="@{/ReposicaoListar}">Reposições</a>
-                    <a class="collapse-item" th:href="@{/ClienteListar}">Clientes</a>
-                    <a class="collapse-item" th:href="@{/VendaListar}">Vendas</a>
-                    <a class="collapse-item" th:href="@{/PromissoriaListar}">Promissórias</a>
-                    <a class="collapse-item" th:href="@{/EntregaListar}">Entregas</a>
+                    <a class="collapse-item" th:href="@{/ProdutoListar}" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">Produtos</a>
+                    <a class="collapse-item" th:href="@{/CategoriaListar}" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">Categorias</a>
+                    <a class="collapse-item" th:href="@{/FornecedorListar}" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">Fornecedores</a>
+                    <a class="collapse-item" th:href="@{/ReposicaoListar}" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">Reposições</a>
+                    <a class="collapse-item" th:href="@{/ClienteListar}" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">Clientes</a>
+                    <a class="collapse-item" th:href="@{/VendaListar}" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">Vendas</a>
+                    <a class="collapse-item" th:href="@{/PromissoriaListar}" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">Promissórias</a>
+                    <a class="collapse-item" th:href="@{/EntregaListar}" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">Entregas</a>
                 </div>
             </div>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasRole('ADMINISTRADOR')">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cogs"></i>
@@ -84,7 +84,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-white small">Admin</span>
+                            <span class="mr-2 d-none d-lg-inline text-white small" sec:authentication="principal.username"></span>
                             <img class="img-profile rounded-circle" th:src="@{/img/undraw_profile.svg}">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

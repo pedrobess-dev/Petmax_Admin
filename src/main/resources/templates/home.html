@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:replace="~{header :: header-links}"></div>
     <style>
@@ -37,7 +37,7 @@
         <h2 class="h3 mb-4 text-gray-800 text-center">Cadastros</h2>
         <div class="row">
             <!-- Produtos -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">
                 <a th:href="@{/ProdutoListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-box-open card-icon"></i>
@@ -46,7 +46,7 @@
                 </a>
             </div>
             <!-- Categorias -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">
                 <a th:href="@{/CategoriaListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-tags card-icon"></i>
@@ -55,7 +55,7 @@
                 </a>
             </div>
             <!-- Fornecedores -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">
                 <a th:href="@{/FornecedorListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-truck card-icon"></i>
@@ -64,7 +64,7 @@
                 </a>
             </div>
             <!-- Reposições -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('ESTOQUISTA', 'ADMINISTRADOR')">
                 <a th:href="@{/ReposicaoListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-sync-alt card-icon"></i>
@@ -73,7 +73,7 @@
                 </a>
             </div>
             <!-- Clientes -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">
                 <a th:href="@{/ClienteListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-user-friends card-icon"></i>
@@ -82,7 +82,7 @@
                 </a>
             </div>
             <!-- Vendas -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">
                 <a th:href="@{/VendaListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-shopping-cart card-icon"></i>
@@ -91,7 +91,7 @@
                 </a>
             </div>
             <!-- Promissórias -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">
                 <a th:href="@{/PromissoriaListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-file-invoice-dollar card-icon"></i>
@@ -100,7 +100,7 @@
                 </a>
             </div>
             <!-- Entregas -->
-            <div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4" sec:authorize="hasAnyRole('VENDEDOR', 'ADMINISTRADOR')">
                 <a th:href="@{/EntregaListar}" class="text-decoration-none">
                     <div class="card card-option text-center p-4 shadow-sm">
                         <i class="fas fa-truck-moving card-icon"></i>
@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" sec:authorize="hasRole('ADMINISTRADOR')">
         <h2 class="h3 mb-4 text-gray-800 text-center">Administrativo</h2>
         <div class="row">
             <div class="col-md-3 col-sm-6 mb-4">

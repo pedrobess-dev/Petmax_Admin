@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <title>Petmax Admin - Registrar</title>
+
+    <!-- Fontes e CSS -->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column min-vh-100" style="background-color: #6610f2;">
+
+<div class="container flex-grow-1">
+    <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-10 col-md-12 mt-5">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <h1 class="h1 mb-0 text-gray-900 text-center" style="padding-top: 20px;">Petmax Admin</h1>
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Criar Conta</h1>
+                                </div>
+
+                                <!-- Formulário de registro -->
+                                <form th:action="@{/UsuarioRegistrar}" th:object="${usuario}" method="post" class="user">
+                                    <div class="form-group">
+                                        <input type="text" name="nomePrestador"
+                                               class="form-control form-control-user border-primary" th:field="*{nomePrestador}"
+                                               placeholder="Nome completo" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="nomeUsuario"
+                                               class="form-control form-control-user border-primary" th:field="*{nomeUsuario}"
+                                               placeholder="Nome de usuário" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="senha"
+                                               class="form-control form-control-user border-primary" th:field="*{senha}"
+                                               placeholder="Senha" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email"
+                                               class="form-control form-control-user border-primary" th:field="*{email}"
+                                               placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="cpf"
+                                               class="form-control form-control-user border-primary" th:field="*{cpf}"
+                                               placeholder="CPF" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <select th:field="*{papel}" name="papel" class="form-control border-primary" required>
+                                            <option value="" disabled selected>Selecione o papel</option>
+                                            <option value="ADMINISTRADOR">Administrador</option>
+                                            <option value="VENDEDOR">Vendedor</option>
+                                            <option value="ESTOQUISTA">Estoquista</option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit"
+                                            class="btn btn-user btn-block text-white"
+                                            style="background-color: #6610f2;">
+                                        Registrar
+                                    </button>
+                                </form>
+
+                                <!-- Link para login -->
+                                <div class="text-center mt-3">
+                                    <a class="small" th:href="@{/login}">Já possui uma conta? Faça login!</a>
+                                </div>
+
+                                <!-- Mensagens -->
+                                <div th:if="${param.success}" class="text-success mt-3">
+                                    Usuário registrado com sucesso! Faça login.
+                                </div>
+                                <div th:if="${param.error}" class="text-danger mt-3">
+                                    Erro ao registrar. Verifique os dados e tente novamente.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<div th:replace="~{shortfooter :: short-footer}" class="mt-auto"></div>
 </body>
 </html>

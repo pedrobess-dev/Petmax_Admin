@@ -48,6 +48,10 @@
                   </button>
                 </form>
 
+                <div class="text-center mt-3">
+                  <a class="small" th:href="@{/register}">Não possui uma conta? Registre-se!</a>
+                </div>
+
                 <!-- Mensagens de erro e logout -->
                 <div th:if="${param.error}" class="text-danger mt-3">
                   Usuário ou senha inválidos.
