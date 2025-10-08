@@ -64,7 +64,7 @@
                         <span th:if="${#fields.hasErrors('produto')}" th:errors="*{produto}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="qtdVendida" class="col-form-label">Valor</label>
+                        <label for="qtdVendida" class="col-form-label">Qtd. Vendida</label>
                         <input type="number" step="1" class="form-control form-control-user"
                                id="qtdVendida" name="qtdVendida" aria-describedby="Quantidade vendida"
                                th:field="*{qtdVendida}" placeholder="Informe a quantidade vendida">

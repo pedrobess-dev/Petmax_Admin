@@ -100,7 +100,7 @@ public class Promissoria {
         this.produto = produto;
     }
 
-    public double getQtdVendida() {
+    public Integer getQtdVendida() {
         return qtdVendida;
     }
 
