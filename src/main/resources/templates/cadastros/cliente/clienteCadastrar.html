@@ -47,7 +47,7 @@
                         <span th:if="${#fields.hasErrors('nomeCliente')}" th:errors="*{nomeCliente}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="telefone" class="col-form-label">Descrição</label>
+                        <label for="telefone" class="col-form-label">Telefone</label>
                         <input type="text" class="form-control form-control-user"
                                id="telefone" name="telefone" aria-describedby="Telefone do cliente"
                                th:field="*{telefone}" placeholder="Informe o telefone do cliente">
@@ -71,6 +71,17 @@
 <footer th:replace="~{footer :: footer-content}" class="mt-auto"></footer>
 </div>
 </div>
+
+<script src="https://unpkg.com/inputmask@5.0.8/dist/inputmask.min.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        const telefone = document.getElementById("telefone");
+
+        if (telefone) {
+            Inputmask("(99)99999-9999").mask(telefone);
+        }
+    });
+</script>
 
 </body>
 </html>

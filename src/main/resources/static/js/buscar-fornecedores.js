@@ -32,7 +32,6 @@ function buscarFornecedor() {
 
     fetch(`/api/fornecedores/buscar/${cnpj}`, {
         headers: {
-            'Authorization': 'Basic ' + btoa('admin:admin'),
             'Content-Type': 'application/json'
         }
     })
@@ -90,9 +89,7 @@ function salvarFornecedor(fornecedorJson) {
     fetch(`/api/fornecedores/salvar`, {
         method: "POST",
         headers: {
-                "Content-Type": "application/json",
-                // *** ADICIONE ESTE CABEÇALHO ***
-                'Authorization': 'Basic ' + btoa('admin:admin')
+                "Content-Type": "application/json"
         },
         body: JSON.stringify(fornecedorPayload)
     })
