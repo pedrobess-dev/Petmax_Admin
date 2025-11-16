@@ -66,7 +66,7 @@ public class Promissoria {
     }
 
     public Promissoria() {
-        this.idPromissoria = 0;
+        this.idPromissoria = null;
         this.cliente = null;
         this.produto = null;
         this.qtdVendida = 0;

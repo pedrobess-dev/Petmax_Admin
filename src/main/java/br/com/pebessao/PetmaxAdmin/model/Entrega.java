@@ -54,7 +54,7 @@ public class Entrega {
     }
 
     public Entrega() {
-        this.idEntrega = 0;
+        this.idEntrega = null;
         this.venda = null;
         this.cep = "";
         this.bairro = "";

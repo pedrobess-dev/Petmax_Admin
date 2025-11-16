@@ -37,7 +37,7 @@ public class Reposicao {
     }
 
     public Reposicao() {
-        this.idReposicao = 0;
+        this.idReposicao = null;
         this.necessidade = "";
         this.produto = null;
     }

@@ -71,13 +71,6 @@
                         <span th:if="${#fields.hasErrors('qtdVendida')}" th:errors="*{qtdVendida}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="valorVenda" class="col-form-label">Valor</label>
-                        <input type="number" step="any" class="form-control form-control-user"
-                               id="valorVenda" name="valorVenda" aria-describedby="Valor da venda"
-                               th:field="*{valorVenda}" placeholder="Informe o valor da venda">
-                        <span th:if="${#fields.hasErrors('valorVenda')}" th:errors="*{valorVenda}" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
                         <label for="dataVenda" class="col-form-label">Data da Venda</label>
                         <input type="date" class="form-control form-control-user"
                                id="dataVenda" name="dataVenda" aria-describedby="Data da venda"

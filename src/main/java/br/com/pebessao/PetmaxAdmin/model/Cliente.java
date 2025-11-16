@@ -33,7 +33,7 @@ public class Cliente {
     }
 
     public Cliente() {
-        this.idCliente = 0;
+        this.idCliente = null;
         this.nomeCliente = "";
         this.telefone = "";
     }

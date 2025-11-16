@@ -57,9 +57,7 @@ CREATE TABLE promissoria (
     dataValidade DATE NOT NULL,
     CONSTRAINT fk_cliente FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)
     CONSTRAINT fk_produto FOREIGN KEY (idproduto) REFERENCES produto (idproduto);
-); --PEGAR VALOR DO PRODUTO E MULTIPLICAR PELA QUANTIDADE POPULANDO O CAMPO DE VALOR NO FRONT,
-   --DIMINUINDO A qtdEstoque COM UMA TRIGGER;
-   -- FAZER OUTRA TRIGGER PARA QUE, AO EXCLUIR A PROMISSORIA, ADICIONAR A qtdVendida A qtEstoque (TALVEZ...)
+); -- FINALIZADO
 
 CREATE TABLE venda (
     idvenda SERIAL PRIMARY KEY,
@@ -70,10 +68,7 @@ CREATE TABLE venda (
     dataVenda DATE NOT NULL,
     CONSTRAINT fk_cliente FOREIGN KEY (idcliente) REFERENCES cliente (idcliente),
     CONSTRAINT fk_produto FOREIGN KEY (idproduto) REFERENCES produto (idproduto)
-    -- Preciso alterar coluna idproduto para receber idItensVenda (TALVEZ...)
-); -- FINALIZADO (QUASE...FAZER ALGUMAS ALTERAÇÕES PARA PEGAR O VALOR DO PRODUTO E MULTIPLICAR PELA
-   -- QUANTIDADE VENDIDA POPULANDO CAMPO DE VALOR NO FRONT,
-   -- AO FAZER ISSO, FAZER UMA TRIGGER PARA DIMINUIR A qtdESTOQUE A PARTIR DA QUANTIDADE VENDIDA) (TALVEZ...)
+); -- FINALIZADO
 
 CREATE TABLE entrega (
     identrega SERIAL PRIMARY KEY,
@@ -101,3 +96,5 @@ CREATE TABLE promocao (
     precopromocao NUMERIC NOT NULL,
     CONSTRAINT fk_produto FOREIGN KEY (idproduto) REFERENCES produto (idproduto)
 ); -- FINALIZADO
+
+--GERAR RELATÓRIOS

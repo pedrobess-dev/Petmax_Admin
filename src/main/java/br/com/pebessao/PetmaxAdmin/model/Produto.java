@@ -23,6 +23,9 @@ public class Produto {
     @Column(name = "idproduto")
     private Integer idProduto;
 
+    @Column(name = "imagem")
+    private String imagem;
+
     @NotBlank(message = "Nome do produto é obrigatório")
     @Size(max = 50, message = "Nome do produto não pode exceder 50 caracteres.")
     @Column(name = "nomeproduto", nullable = false, length = 50)
@@ -58,10 +61,11 @@ public class Produto {
     @Column(name = "tempromocao", nullable = false)
     private boolean temPromocao;
 
-    public Produto(Integer idProduto, String nomeProduto, double preco, Categoria categoria,
+    public Produto(Integer idProduto, String imagem, String nomeProduto, double preco, Categoria categoria,
                    Fornecedor fornecedor, Integer qtdEstoque, LocalDate dataFabricacao,
                    LocalDate dataValidade, boolean temPromocao) {
         this.idProduto = idProduto;
+        this.imagem = imagem;
         this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.categoria = categoria;
@@ -73,7 +77,8 @@ public class Produto {
     }
 
     public Produto() {
-        this.idProduto = 0;
+        this.idProduto = null;
+        this.imagem = "";
         this.nomeProduto = "";
         this.preco = 0.0;
         this.categoria = null;
@@ -90,6 +95,14 @@ public class Produto {
 
     public void setIdProduto(Integer idProduto) {
         this.idProduto = idProduto;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public String getNomeProduto() {

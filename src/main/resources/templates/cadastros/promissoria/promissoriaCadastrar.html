@@ -71,13 +71,6 @@
                         <span th:if="${#fields.hasErrors('qtdVendida')}" th:errors="*{qtdVendida}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="valor" class="col-form-label">Valor</label>
-                        <input type="number" step="any" class="form-control form-control-user"
-                               id="valor" name="valor" aria-describedby="Valor da promissoria"
-                               th:field="*{valor}" placeholder="Informe o valor da promissoria">
-                        <span th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-2">
                         <label for="dataEmissao" class="col-form-label">Data de Emissão</label>
                         <input type="date" class="form-control form-control-user"
                                id="dataEmissao" name="dataEmissao" aria-describedby="Data de emissão"

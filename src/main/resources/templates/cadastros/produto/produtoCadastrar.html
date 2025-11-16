@@ -40,6 +40,12 @@
                            id="idproduto" name="idproduto" aria-describedby="ID do produto"
                            th:field="*{idProduto}" readonly="readonly" placeholder="">
                     <div class="form-group col-md-4">
+                        <label for="imagem" class="col-form-label">URL da imagem</label>
+                        <input type="text" class="form-control form-control-user"
+                               id="imagem" name="imagem" aria-describedby="Imagem do produto"
+                               th:field="*{imagem}" placeholder="Informe a URL da imagem">
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="nomeproduto" class="col-form-label">Nome do Produto</label>
                         <input type="text" class="form-control form-control-user"
                                id="nomeproduto" name="nomeproduto" aria-describedby="Nome do produto"

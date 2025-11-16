@@ -35,7 +35,7 @@ public class Promocao {
     }
 
     public Promocao() {
-        this.idPromocao = 0;
+        this.idPromocao = null;
         this.produto = null;
         this.precoPromocao = 0.0;
     }

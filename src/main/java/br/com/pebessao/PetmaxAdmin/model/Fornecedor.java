@@ -71,7 +71,7 @@ public class Fornecedor {
     private String email;
 
     public Fornecedor() {
-        this.idFornecedor = 0;
+        this.idFornecedor = null;
         this.nomeFornecedor = "";
         this.telefone = "";
         this.cep = "";

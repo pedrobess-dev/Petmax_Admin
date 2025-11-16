@@ -60,7 +60,7 @@ public class Usuario {
     }
 
     public Usuario() {
-        this.idUsuario = 0;
+        this.idUsuario = null;
         this.nomePrestador = "";
         this.nomeUsuario = "";
         this.senha = "";

@@ -28,7 +28,7 @@ public class Categoria {
     private String descricao;
 
     public Categoria() {
-        this.idCategoria = 0;
+        this.idCategoria = null;
         this.nomeCategoria = "";
         this.descricao = "";
     }

@@ -53,7 +53,7 @@ public class Venda {
     }
 
     public Venda() {
-        this.idVenda = 0;
+        this.idVenda = null;
         this.cliente = null;
         this.produto = null;
         this.qtdVendida = 0;
